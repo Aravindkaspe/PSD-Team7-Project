@@ -1,5 +1,7 @@
+
 import React from 'react';
 import ContactForm from './ContactForm';
+import '../Styles/ContactForm.css';
 
 const ContactFormModal = ({ isOpen, onClose }) => {
     return (
@@ -15,3 +17,4 @@ const ContactFormModal = ({ isOpen, onClose }) => {
 };
 
 export default ContactFormModal;
+
