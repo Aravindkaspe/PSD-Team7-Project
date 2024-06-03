@@ -22,7 +22,7 @@ const ContactForm = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
-                    <textarea id="description" name="description" rows="4" placeholder="Tell us about your Query" required></textarea>
+                    <textarea id="description" name="description" rows="1" placeholder="Tell us about your Query" required></textarea>
                 </div>
                 <button type="submit" className="submit-button">Send</button>
             </form>

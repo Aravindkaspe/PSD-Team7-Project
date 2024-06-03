@@ -1,13 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import NavBar from '../Components/NavBar';
-import ContactFormModal from '../Components/ContactFormModal'; 
-import ContactSection from '../Components/ContactSection'; 
+import ContactSection from '../Components/ContactSection'; // Import ContactSection
 import '../Styles/NavigationBar.css';
 import '../Styles/styles.css';
 import '../Styles/ContactForm.css';
+import NavBar from '../Components/NavBar';
+import ContactFormModal from '../Components/ContactFormModal';
 
+import logo from '../Images/3D company Icon.png';
 import wallpaper15 from '../Images/Wallpaper15.jpg';
 import wallpaper14 from '../Images/wallpaper14.png';
 import workingStyle from '../Images/WorkingStyle.png';
@@ -15,7 +15,28 @@ import wallpaper12 from '../Images/wallpaper12.png';
 import get30 from '../Images/get (30).jpeg';
 
 const Home = () => {
-    const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+                const header = document.querySelector('header');
+                
+                const handleScroll = () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('header-scrolled');
+                        header.classList.remove('header-transparent');
+                    } else {
+                        header.classList.add('header-transparent');
+                        header.classList.remove('header-scrolled');
+                    }
+                };
+        
+                window.addEventListener('scroll', handleScroll);
+        
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                };
+            }, []);
+
+            const [modalOpen, setModalOpen] = useState(false);
 
     const openModal = (e) => {
         e.preventDefault();
@@ -24,30 +45,14 @@ const Home = () => {
 
     const closeModal = () => setModalOpen(false);
 
-    useEffect(() => {
-        const header = document.querySelector('header');
-
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                header.classList.add('header-scrolled');
-                header.classList.remove('header-transparent');
-            } else {
-                header.classList.add('header-transparent');
-                header.classList.remove('header-scrolled');
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+        
 
     return (
         <div>
-            <NavBar openModal={openModal} />
+             <NavBar openModal={openModal} />
+            
             <main>
+                {/* Your main content sections */}
                 <section className="hero">
                     <div className="hero-container">
                         <img src={wallpaper15} alt="3D Printing Image" className="bgm" />
@@ -100,15 +105,14 @@ const Home = () => {
                     <p>Based in the vibrant city of Hyderabad, our mission extends across India as we build a dynamic team of like-minded individuals committed to making a difference. Our journey is fueled by creativity, collaboration, and an unwavering commitment to the environment.</p>
                 </section>
 
-                <ContactSection /> {/* Use ContactSection component */}
-                <ContactFormModal isOpen={modalOpen} onClose={closeModal} /> Use modal directly if needed
+                <ContactSection /> 
+                <ContactFormModal isOpen={modalOpen} onClose={closeModal} /> 
             </main>
-            <footer>
+            {/* <footer>
                 <p>&copy; The 3D Craft House. All rights reserved.</p>
-            </footer>
+            </footer> */}
         </div>
     );
 };
 
 export default Home;
-

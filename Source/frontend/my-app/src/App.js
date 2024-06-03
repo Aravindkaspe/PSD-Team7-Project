@@ -16,6 +16,7 @@ function App() {
         <Route path="/booking" element={<div>Booking Page</div>} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/3d-printing" element={<ThreeDPrintingPage />} />
+        
      
       </Routes>
     </Router>
