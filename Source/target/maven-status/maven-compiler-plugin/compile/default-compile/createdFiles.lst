@@ -1,0 +1,5 @@
+com\project\_Dcrafts\ContactController.class
+com\project\_Dcrafts\model\Contact.class
+com\project\_Dcrafts\repository\ContactRepository.class
+com\project\_Dcrafts\service\ContactService.class
+com\project\_Dcrafts\Application.class
