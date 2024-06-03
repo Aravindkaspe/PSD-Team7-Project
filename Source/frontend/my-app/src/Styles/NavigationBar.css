@@ -1,0 +1,26 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .brand-title {
+    font-size: 1.5rem;
+  }
+  
+  .icons-container {
+    display: flex;
+  }
+
+  .app-bar {
+    background-color: #333; /* Change the background color of the app bar */
+  }
+  
+  /* Styling for the brand title */
+  .brand-title a {
+    color: white; /* Change the color of the brand title text */
+  }
+  
+  /* Styling for the icons */
+  .icons-container .MuiIconButton-root {
+    color: white; /* Change the color of the icons */
+  }
