@@ -65,6 +65,9 @@ const ThreeDPrintingPage = () => {
                 <ContactSection />
                 <ContactFormModal isOpen={modalOpen} onClose={closeModal} />
             </main>
+            <footer>
+                <p>&copy; The 3D Craft House. All rights reserved.</p>
+            </footer>
         </div>
     );
 };

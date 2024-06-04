@@ -110,9 +110,9 @@ const Home = () => {
                 <ContactSection /> 
                 <ContactFormModal isOpen={modalOpen} onClose={closeModal} /> 
             </main>
-            {/* <footer>
+            <footer>
                 <p>&copy; The 3D Craft House. All rights reserved.</p>
-            </footer> */}
+            </footer>
         </div>
     );
 };
