@@ -102,7 +102,7 @@ nav ul li a:hover {
 
 .intro-section {
     background-color: rgba(244, 244, 244, 0.9);
-    padding: 50px 20px;
+    padding: 120px 20px;
     text-align: center;
 }
 
@@ -119,10 +119,13 @@ nav ul li a:hover {
 }
 
 .material-section {
+    padding: 40px 20px;
     display: flex;
     align-items: center;
-    padding: 50px 20px;
-    background-color: #f0f0f0;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .material {

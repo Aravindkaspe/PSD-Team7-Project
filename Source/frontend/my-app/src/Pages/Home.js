@@ -86,7 +86,9 @@ const Home = () => {
                     <div className="overlay"></div>
                     <div className="material">
                         <h1>Materials we Use</h1>
-                        <button className="learn-more">Learn More</button>
+                        <Link to="/materialsPage">
+                        <button className="learn-more2">Learn More</button>
+                        </Link>
                     </div>
                 </section>
 
