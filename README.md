@@ -26,9 +26,10 @@ Knowledge Hub: Serve as a central repository of information on sustainable 3D cr
 
 ## Installation
 
-Clone the repository.
-Navigate to the Source directory.
-Install dependencies with npm install.
+1. Clone the repository.
+2. Installations of NodeJs: Install NodeJs v20/14.0 version from the below URL https://nodejs.org/en/download/prebuilt-installer 
+3. Navigate to the Source directory.
+4. Install dependencies with npm install.
 
 ## Run the application:
 
