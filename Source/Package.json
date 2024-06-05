@@ -1,0 +1,16 @@
+{
+    "name": "Source",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "concurrently \"npm run server\" \"npm run client\"",
+      "server": "cd backend && npm start",
+      "client": "cd frontend/my-app && npm start"
+    },
+    "devDependencies": {
+      "concurrently": "^6.2.1"
+    },
+    "dependencies": {
+      "react-dom": "^18.3.1"
+    }
+  }
+  
