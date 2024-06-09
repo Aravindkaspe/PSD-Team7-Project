@@ -37,7 +37,7 @@ export const sendContactEmail = (contactDetails) => {
     from: process.env.GMAIL_USER,
     to: contactDetails.email,
     subject: 'Thank you for contacting us!',
-    text: `Dear ${contactDetails.name},\n\nThank you for reaching out to us. We will get back to you shortly.\n\nBest regards,\n3D Craft House`,
+    text: `Dear ${contactDetails.name},\n\nThank you for reaching out to us. We will get back to you shortly.\n\nBest regards,\nYour Company`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -59,8 +59,8 @@ export const sendAlertEmailToProductUsers = async (contactDetails) => {
       const mailOptions = {
         from: process.env.GMAIL_USER,
         to: user.email,
-        subject: 'Alert: New Contact Us Submission',
-        text: `Dear ${user.name},\n\nA new customer has submitted the Contact Us form. Here are the details:\nCustomer Name: ${contactDetails.name}\nPhone Number: ${contactDetails.phoneNumber}\nEmail: ${contactDetails.email}\nDescription: ${contactDetails.description}\n\nBest regards,\nYour Company`,
+        subject: 'New Contact Us Submission Alert',
+        text: `Dear ${user.name},\n\nA new customer has submitted the Contact Us form. Here are the details:\n\nName: ${contactDetails.name}\nRole: ${contactDetails.role}\nEmail: ${contactDetails.email}\n\nBest regards,\nYour Company`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -73,5 +73,50 @@ export const sendAlertEmailToProductUsers = async (contactDetails) => {
     });
   } catch (error) {
     console.error('Error sending alert emails to product users:', error);
+  }
+};
+
+// Function to send email to customers who placed an order
+export const sendOrderEmailToCustomer = (orderDetails) => {
+  const mailOptions = {
+    from: process.env.GMAIL_USER,
+    to: orderDetails.customerEmail,
+    subject: 'Order Confirmation',
+    text: `Dear ${orderDetails.customerName},\n\nThank you for your order! Here are the details:\n\nProduct: ${orderDetails.product}\nQuantity: ${orderDetails.quantity}\nPrice: $${orderDetails.price}\nOrder Date: ${orderDetails.orderDate}\n\nBest regards,\nYour Company`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending order email:', error);
+    } else {
+      console.log('Order email sent:', info.response);
+    }
+  });
+};
+
+// Function to send alert email to product users about a new order
+export const sendOrderAlertEmailToProductUsers = async (orderDetails) => {
+  try {
+    // Find all users who opted for order notifications
+    const productUsers = await ProductUser.find({ notify_orders: true });
+
+    productUsers.forEach((user) => {
+      const mailOptions = {
+        from: process.env.GMAIL_USER,
+        to: user.email,
+        subject: 'New Order Alert',
+        text: `Dear ${user.name},\n\nA new order has been placed. Here are the details:\n\nCustomer Name: ${orderDetails.customerName}\nProduct: ${orderDetails.product}\nQuantity: ${orderDetails.quantity}\nPrice: $${orderDetails.price}\nOrder Date: ${orderDetails.orderDate}\n\nBest regards,\nYour Company`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(`Error sending order alert email to ${user.email}:`, error);
+        } else {
+          console.log(`Order alert email sent to ${user.email}:`, info.response);
+        }
+      });
+    });
+  } catch (error) {
+    console.error('Error sending order alert emails to product users:', error);
   }
 };
