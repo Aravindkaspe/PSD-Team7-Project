@@ -1,10 +1,26 @@
-import React from 'react';
+import {React,useState} from 'react';
 import '../Styles/Bookings.css';
 import wallpaper from '../Images/BookingsWallpaper.jpg';
+import NavBar from '../Components/NavBar';
+import ContactSection from '../Components/ContactForm';
+import ContactFormModal from '../Components/ContactFormModal';
 
-const Bookings = () => {
+const Bookings = () => { 
+  const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = (e) => {
+        e.preventDefault();
+        setModalOpen(true);
+    };
+
+    const closeModal = () => setModalOpen(false);
   return (
+    <div>
+    <div>
+      <NavBar openModal={openModal} />
+    </div>
     <div className="bookings-page">
+     
       <header className="hero-section">
         <img src={wallpaper} alt="Bookings Wallpaper" className="hero-image" />
         <div className="hero-overlay">
@@ -67,7 +83,9 @@ const Bookings = () => {
         <div className="quote-button-container">
           <button className="quote-button">Ask a Quote</button>
         </div>
+                <ContactFormModal isOpen={modalOpen} onClose={closeModal} />
       </section>
+    </div>
     </div>
   );
 }
