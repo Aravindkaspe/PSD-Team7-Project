@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { PORT, MongoURL } from "./config.js";
 import contactRouter from "./routes/contactRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 import cors from "cors";
 
 const app = express();
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/contact", contactRouter);
+app.use("/order", orderRouter);
 
 app.get("/", (req, res) => {
 	return res.status(200).send("<h1>Hello, World!</h1>");
