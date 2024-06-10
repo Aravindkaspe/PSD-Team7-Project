@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import Contact from './models/Contact.js';
 import ProductUser from './models/ProductUser.js';
+import Quote from './models/Quote.js';
 
 dotenv.config();
 
@@ -31,7 +31,6 @@ export const sendEmail = (to, subject, text) => {
   });
 };
 
-// Function to send email to customers who filled contact us page
 export const sendContactEmail = (contactDetails) => {
   const mailOptions = {
     from: process.env.GMAIL_USER,
@@ -49,10 +48,8 @@ export const sendContactEmail = (contactDetails) => {
   });
 };
 
-// Function to send alert email to product users
 export const sendAlertEmailToProductUsers = async (contactDetails) => {
   try {
-    // Find all users who opted for order notifications
     const productUsers = await ProductUser.find({ notify_orders: true });
 
     productUsers.forEach((user) => {
@@ -76,7 +73,6 @@ export const sendAlertEmailToProductUsers = async (contactDetails) => {
   }
 };
 
-// Function to send email to customers who placed an order
 export const sendOrderEmailToCustomer = (orderDetails) => {
   const mailOptions = {
     from: process.env.GMAIL_USER,
@@ -94,10 +90,8 @@ export const sendOrderEmailToCustomer = (orderDetails) => {
   });
 };
 
-// Function to send alert email to product users about a new order
 export const sendOrderAlertEmailToProductUsers = async (orderDetails) => {
   try {
-    // Find all users who opted for order notifications
     const productUsers = await ProductUser.find({ notify_orders: true });
 
     productUsers.forEach((user) => {
@@ -118,5 +112,47 @@ export const sendOrderAlertEmailToProductUsers = async (orderDetails) => {
     });
   } catch (error) {
     console.error('Error sending order alert emails to product users:', error);
+  }
+};
+
+export const sendQuoteConfirmationEmail = (quoteDetails) => {
+  const mailOptions = {
+    from: process.env.GMAIL_USER,
+    to: quoteDetails.customerEmail,
+    subject: 'Quote Confirmation',
+    text: `Dear ${quoteDetails.customerName},\n\nThank you for requesting a quote! Here are the details:\n\nService: ${quoteDetails.service}\nTotal Budget: $${quoteDetails.totalBudget}\nItem Description: ${quoteDetails.itemDescription}\nLocation: ${quoteDetails.location}\n\nBest regards,\nYour Company`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending quote email:', error);
+    } else {
+      console.log('Quote email sent:', info.response);
+    }
+  });
+};
+
+export const sendQuoteSubmissionEmailToProductUsers = async (quoteDetails) => {
+  try {
+    const productUsers = await ProductUser.find({ notify_orders: true });
+
+    productUsers.forEach((user) => {
+      const mailOptions = {
+        from: process.env.GMAIL_USER,
+        to: user.email,
+        subject: 'New Quote Submission Alert',
+        text: `Dear ${user.name},\n\nA new quote has been submitted. Here are the details:\n\nCustomer Name: ${quoteDetails.customerName}\nService: ${quoteDetails.service}\nTotal Budget: $${quoteDetails.totalBudget}\nItem Description: ${quoteDetails.itemDescription}\nLocation: ${quoteDetails.location}\n\nBest regards,\nYour Company`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(`Error sending quote alert email to ${user.email}:`, error);
+        } else {
+          console.log(`Quote alert email sent to ${user.email}:`, info.response);
+        }
+      });
+    });
+  } catch (error) {
+    console.error('Error sending quote alert emails to product users:', error);
   }
 };
