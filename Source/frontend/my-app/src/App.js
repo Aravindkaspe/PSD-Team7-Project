@@ -8,6 +8,7 @@ import ThreeDPrintingPage from './Pages/3DPrintingPage';
 import MaterialsPage from './Pages/MaterialsPage';
 import LoginForm from './Components/LoginPage';
 import './App.css';
+import Bookings from './Pages/Bookings';
  
 function App() {
     return (
@@ -26,11 +27,11 @@ const AppRoutes = () => {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/booking" element={<div>Booking Page</div>} />
+            <Route path="/booking" element={<Bookings/>} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/shop" element={isAuthenticated ? <ShopPage /> : <Navigate to="/login" />} />
-            <Route path="/3d-printing" element={isAuthenticated ? <ThreeDPrintingPage /> : <Navigate to="/login" />} />
-            <Route path="/materialsPage" element={isAuthenticated ? <MaterialsPage /> : <Navigate to="/login" />} />
+            <Route path="/3d-printing" element={<ThreeDPrintingPage />} />
+            <Route path="/materialsPage" element={<MaterialsPage />} />
         </Routes>
     );
 };
