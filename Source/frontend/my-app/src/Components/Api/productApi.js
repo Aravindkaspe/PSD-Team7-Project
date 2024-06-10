@@ -1,6 +1,4 @@
-// api/productApi.js
-// This is a dummy function to simulate fetching products from an API
-// Replace this with your actual API call logic
+
 
 const fetchProducts = async (filterOptions) => {
     // Dummy product data
