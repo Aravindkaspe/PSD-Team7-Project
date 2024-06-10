@@ -2,12 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import { PORT, MongoURL } from "./config.js";
 import contactRouter from "./routes/contactRoute.js";
+import userRouter from "./routes/User.js";
 import cors from "cors";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/User", userRouter);
 
 app.use(
 	cors({
