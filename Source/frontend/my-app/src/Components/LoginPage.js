@@ -79,64 +79,64 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <div class="body-container">
-      <div class="container" id="container">
-      <div className={`form-container ${isSignUp ? 'sign-up-container' : 'sign-in-container'}`}>
-        <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
-        {!isSignUp && (
-          <>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signInEmail}
-              onChange={(e) => setSignInEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signInPassword}
-              onChange={(e) => setSignInPassword(e.target.value)}
-            />
-            <div className="btn-grad" onClick={handleLogin}>
-              Sign In
+      <div className="body-container">
+        <div className="container" id="container">
+          <div className={`form-container ${isSignUp ? 'sign-up-container' : 'sign-in-container'}`}>
+            <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
+            {!isSignUp && (
+              <>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={signInEmail}
+                  onChange={(e) => setSignInEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={signInPassword}
+                  onChange={(e) => setSignInPassword(e.target.value)}
+                />
+                <button className="btn-grad" onClick={handleLogin}>
+                  Sign In
+                </button>
+              </>
+            )}
+            {isSignUp && (
+              <>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={signUpName}
+                  onChange={(e) => setSignUpName(e.target.value)}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={signUpEmail}
+                  onChange={(e) => setSignUpEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={signUpPassword}
+                  onChange={(e) => setSignUpPassword(e.target.value)}
+                />
+                <button className="btn-grad" onClick={handleSignUp}>
+                  Sign Up
+                </button>
+              </>
+            )}
+            <a href="#" onClick={() => setIsSignUp(!isSignUp)}>
+              {isSignUp ? 'Already have an account? Sign in' : 'Don\'t have an account? Sign up'}
+            </a>
+          </div>
+          {showSuccessMessage && (
+            <div className="success-message">
+              <p>Successful Sign In</p>
             </div>
-          </>
-        )}
-        {isSignUp && (
-          <>
-            <input
-              type="text"
-              placeholder="Name"
-              value={signUpName}
-              onChange={(e) => setSignUpName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={signUpEmail}
-              onChange={(e) => setSignUpEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signUpPassword}
-              onChange={(e) => setSignUpPassword(e.target.value)}
-            />
-            <div className="btn-grad" onClick={handleSignUp}>
-              Sign Up
-            </div>
-          </>
-        )}
-        <a href="#" onClick={() => setIsSignUp(!isSignUp)}>
-          {isSignUp ? 'Already have an account? Sign in' : 'Don\'t have an account? Sign up'}
-        </a>
-      </div>
-      {showSuccessMessage && (
-        <div className="success-message">
-          <p>Successful Sign In</p>
+          )}
         </div>
-      )}
-      </div>
       </div>
     </div>
   );
