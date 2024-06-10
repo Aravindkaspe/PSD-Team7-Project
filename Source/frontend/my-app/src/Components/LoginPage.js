@@ -79,6 +79,8 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
+      <div class="body-container">
+      <div class="container" id="container">
       <div className={`form-container ${isSignUp ? 'sign-up-container' : 'sign-in-container'}`}>
         <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
         {!isSignUp && (
@@ -134,6 +136,8 @@ const LoginPage = () => {
           <p>Successful Sign In</p>
         </div>
       )}
+      </div>
+      </div>
     </div>
   );
 };
