@@ -1,36 +1,30 @@
-import express from "express";
-import { Contact } from "../models/Contact.js";
+import express from 'express';
+import { sendContactEmail, sendAlertEmailToProductUsers } from '../emailService.js';
+import Contact from '../models/Contact.js';
 
-const contactRouter = express.Router();
+const router = express.Router();
 
-contactRouter.get("/", (req, res) => {
-	res.status(200).send("This is a contact");
+router.post('/createcontact', async (req, res) => {
+  const contactDetails = req.body;
+
+  try {
+    console.log('Received contact details:', contactDetails);
+
+    const newContact = new Contact(contactDetails);
+    await newContact.save();
+    console.log('Contact details saved to DB.');
+
+    sendContactEmail(contactDetails);
+    console.log('Contact email sent.');
+
+    await sendAlertEmailToProductUsers(contactDetails);
+    console.log('Alert emails sent to product users.');
+
+    res.status(200).send('Contact form submitted successfully');
+  } catch (error) {
+    console.error('Error submitting contact form:', error);
+    res.status(500).send('Error submitting contact form');
+  }
 });
 
-contactRouter.post("/createcontact", async (req, res) => {
-	try {
-		// console.log(req.body);
-		// const contact = new Contact(req.body);
-		// console.log(contact);
-		if (!req.body.name || !req.body.email || !req.body.phoneNumber) {
-			return res.status(400).send("Please provide required information!");
-		}
-
-		const newContact = {
-			name: req.body.name,
-			email: req.body.email,
-			phoneNumber: req.body.phoneNumber,
-		};
-		if (req.body.description) {
-			newContact.description = req.body.description;
-		}
-
-		const createdContact = await Contact.create(newContact);
-		return res.status(201).send(createdContact);
-	} catch (error) {
-		console.log(error.message);
-		return res.status(500).send({ message: error.message });
-	}
-});
-
-export default contactRouter;
+export default router;

@@ -1,32 +1,13 @@
-import mongoose from "mongoose";
-import validator from "validator";
+import mongoose from 'mongoose';
 
-const contactSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
-		trim: true,
-	},
-	email: {
-		type: String,
-		required: true,
-		trim: true,
-		unique: true,
-		validate(value) {
-			if (!validator.isEmail(value)) {
-				throw new Error("Invalid Email");
-			}
-		},
-	},
-	phoneNumber: {
-		type: String,
-		required: true,
-		trim: true,
-	},
-	description: {
-		type: String,
-		trim: true,
-	},
+const { Schema } = mongoose;
+
+const contactSchema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true},
+  phoneNumber: { type: String, required: true },
+  description: { type: String, required: true }
 });
 
-export const Contact = mongoose.model("Contact", contactSchema);
+const Contact = mongoose.model('Contact', contactSchema);
+export default Contact;
