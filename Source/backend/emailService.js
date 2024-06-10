@@ -36,7 +36,7 @@ export const sendContactEmail = (contactDetails) => {
     from: process.env.GMAIL_USER,
     to: contactDetails.email,
     subject: 'Thank you for contacting us!',
-    text: `Dear ${contactDetails.name},\n\nThank you for reaching out to us. We will get back to you shortly.\n\nBest regards,\nYour Company`,
+    text: `Dear ${contactDetails.name},\n\nThank you for reaching out to us. We will get back to you shortly.\n\nBest regards,\nThe 3D Craft House`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -57,7 +57,7 @@ export const sendAlertEmailToProductUsers = async (contactDetails) => {
         from: process.env.GMAIL_USER,
         to: user.email,
         subject: 'New Contact Us Submission Alert',
-        text: `Dear ${user.name},\n\nA new customer has submitted the Contact Us form. Here are the details:\n\nName: ${contactDetails.name}\nRole: ${contactDetails.role}\nEmail: ${contactDetails.email}\n\nBest regards,\nYour Company`,
+        text: `Dear ${user.name},\n\nA new customer has submitted the Contact Us form. Here are the details:\n\nName: ${contactDetails.name}\nRole: ${contactDetails.role}\nEmail: ${contactDetails.email}\n\nBest regards,\nThe 3D Craft House`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -78,7 +78,7 @@ export const sendOrderEmailToCustomer = (orderDetails) => {
     from: process.env.GMAIL_USER,
     to: orderDetails.customerEmail,
     subject: 'Order Confirmation',
-    text: `Dear ${orderDetails.customerName},\n\nThank you for your order! Here are the details:\n\nProduct: ${orderDetails.product}\nQuantity: ${orderDetails.quantity}\nPrice: $${orderDetails.price}\nOrder Date: ${orderDetails.orderDate}\n\nBest regards,\nYour Company`,
+    text: `Dear ${orderDetails.customerName},\n\nThank you for your order! Here are the details:\n\nProduct: ${orderDetails.product}\nQuantity: ${orderDetails.quantity}\nPrice: $${orderDetails.price}\nOrder Date: ${orderDetails.orderDate}\n\nBest regards,\nThe 3D Craft House`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -99,7 +99,7 @@ export const sendOrderAlertEmailToProductUsers = async (orderDetails) => {
         from: process.env.GMAIL_USER,
         to: user.email,
         subject: 'New Order Alert',
-        text: `Dear ${user.name},\n\nA new order has been placed. Here are the details:\n\nCustomer Name: ${orderDetails.customerName}\nProduct: ${orderDetails.product}\nQuantity: ${orderDetails.quantity}\nPrice: $${orderDetails.price}\nOrder Date: ${orderDetails.orderDate}\n\nBest regards,\nYour Company`,
+        text: `Dear ${user.name},\n\nA new order has been placed. Here are the details:\n\nCustomer Name: ${orderDetails.customerName}\nProduct: ${orderDetails.product}\nQuantity: ${orderDetails.quantity}\nPrice: $${orderDetails.price}\nOrder Date: ${orderDetails.orderDate}\n\nBest regards,\nThe 3D Craft House`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -120,7 +120,7 @@ export const sendQuoteConfirmationEmail = (quoteDetails) => {
     from: process.env.GMAIL_USER,
     to: quoteDetails.customerEmail,
     subject: 'Quote Confirmation',
-    text: `Dear ${quoteDetails.customerName},\n\nThank you for requesting a quote! Here are the details:\n\nService: ${quoteDetails.service}\nTotal Budget: $${quoteDetails.totalBudget}\nItem Description: ${quoteDetails.itemDescription}\nLocation: ${quoteDetails.location}\n\nBest regards,\nYour Company`,
+    text: `Dear ${quoteDetails.customerName},\n\nThank you for requesting a quote! Here are the details:\n\nService: ${quoteDetails.service}\nTotal Budget: $${quoteDetails.totalBudget}\nItem Description: ${quoteDetails.itemDescription}\nLocation: ${quoteDetails.location}\n\nBest regards,\nThe 3D Craft House`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -141,7 +141,7 @@ export const sendQuoteSubmissionEmailToProductUsers = async (quoteDetails) => {
         from: process.env.GMAIL_USER,
         to: user.email,
         subject: 'New Quote Submission Alert',
-        text: `Dear ${user.name},\n\nA new quote has been submitted. Here are the details:\n\nCustomer Name: ${quoteDetails.customerName}\nService: ${quoteDetails.service}\nTotal Budget: $${quoteDetails.totalBudget}\nItem Description: ${quoteDetails.itemDescription}\nLocation: ${quoteDetails.location}\n\nBest regards,\nYour Company`,
+        text: `Dear ${user.name},\n\nA new quote has been submitted. Here are the details:\n\nCustomer Name: ${quoteDetails.customerName}\nService: ${quoteDetails.service}\nTotal Budget: $${quoteDetails.totalBudget}\nItem Description: ${quoteDetails.itemDescription}\nLocation: ${quoteDetails.location}\n\nBest regards,\nThe 3D Craft House`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
