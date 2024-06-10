@@ -1,10 +1,16 @@
 import mongoose from 'mongoose';
+import validator from 'validator';
 
-const productUserSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const productUserSchema = new Schema({
   name: { type: String, required: true },
-  role: { type: String, required: true },
-  notify_orders: { type: Boolean, required: true },
-  email: { type: String, required: true }
+  email: {
+    type: String,
+    required: true,
+    validate: [validator.isEmail, 'Invalid email format']
+  },
+  notify_orders: { type: Boolean, required: true }
 });
 
 const ProductUser = mongoose.model('ProductUser', productUserSchema);
