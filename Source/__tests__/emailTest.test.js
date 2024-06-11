@@ -1,8 +1,8 @@
 
 import mongoose from 'mongoose';
-import ProductUserModel from '../backend/models/ProductUser'; 
-import ContactModel from '../backend/models/Contact'; 
-import QuoteModel from '../backend/models/Quote'; 
+import ProductUser from '../backend/models/ProductUser'; 
+import ContactDetails from '../backend/models/Contact'; 
+import quote from '../backend/models/Quote'; 
 
 const mockContact = {
   email: 'contact@gmail.com',
@@ -36,40 +36,40 @@ jest.mock('../backend/models/Quote', () => ({
 
 describe('load email data from db', () => {
   beforeAll(async () => {
-    const dbURI = 'mongodb+srv://cgundu1:8IoxAEGU0uT8row3@cluster0.hqtcl60.mongodb.net/projectDB'; 
+    const dbURI = 'mongodb+srv://cgundu1:8IoxAEGU0uT8row3@cluster0.hqtcl60.mongodb.net/projectDB';
     await mongoose.connect(dbURI);
   });
 
   afterAll(async () => {
     await mongoose.connection.close();
   });
-
-  test('loaded customer email address', async () => {
-    const contact = await ContactModel.findOne(); 
+  
+  test('fetch customer email address', async () => {
+    const contact = await ContactDetails.findOne(); 
     expect(contact).toBeTruthy();
     expect(contact.email).toMatch(/.+@.+\..+/); 
   });
 
-  test('loaded productuser email address', async () => {
-    const productUser = await ProductUserModel.findOne(); 
+  test('fetch productuser email address', async () => {
+    const productUser = await ProductUser.findOne(); 
     expect(productUser).toBeTruthy();
     expect(productUser.email).toMatch(/.+@.+\..+/); 
   });
 
-  test('loaded customer name and phone number', async () => {
-    const contact = await ContactModel.findOne(); 
+  test('fetch customer name and phone number', async () => {
+    const contact = await ContactDetails.findOne(); 
     expect(contact).toBeTruthy();
     expect(contact.name).toBe('John Doe'); 
-    expect(contact.phoneNumber).toBe('123-456-7890'); 
+    expect(contact.phoneNumber).toBe('123-456-7890');
   });
 
-  test('loaded quote details', async () => {
-    const quote = await QuoteModel.findOne(); 
-    expect(quote).toBeTruthy();
-    expect(quote.customerName).toBe('Jane Smith'); 
-    expect(quote.service).toBe('Web Development'); 
-    expect(quote.totalBudget).toBe(1500);
-    expect(quote.itemDescription).toBe('Website redesign'); 
-    expect(quote.location).toBe('New York');
+  test('fetch quote details', async () => {
+    const Quote = await quote.findOne(); 
+    expect(Quote).toBeTruthy();
+    expect(Quote.customerName).toBe('Jane Smith'); 
+    expect(Quote.service).toBe('Web Development'); 
+    expect(Quote.totalBudget).toBe(1500); 
+    expect(Quote.itemDescription).toBe('Website redesign'); 
+    expect(Quote.location).toBe('New York');
   });
 });
