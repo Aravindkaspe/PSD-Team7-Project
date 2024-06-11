@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import QuoteForm from './Pages/QuoteForm';
 
 describe('QuoteForm Component', () => {
