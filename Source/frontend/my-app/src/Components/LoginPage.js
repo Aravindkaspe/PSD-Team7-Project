@@ -18,7 +18,6 @@ const LoginPage = () => {
     if (showSuccessMessage) {
       const timer = setTimeout(() => {
         setShowSuccessMessage(false);
-        console.log('Redirecting to shop page...');
         navigate('/shop');
       }, 1000);
 
@@ -26,41 +25,64 @@ const LoginPage = () => {
     }
   }, [showSuccessMessage, navigate]);
 
-  const handleLogin = async () => {
+//   const handleLogin = async () => {
+//     try {
+//       const response = await fetch('http://localhost:5555/User/login', { // Update with your backend URL
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ Email: signInEmail, Password: signInPassword }), // Ensure keys match backend
+//       });
+
+//       if (response.ok) {
+//         const data = await response.json();
+//         login(data.token); // Assuming `login` function stores token
+//         setShowSuccessMessage(true);
+//       } else {
+//         alert('Invalid credentials. Please try again.');
+//       }
+//     } catch (error) {
+//       console.error('Error authenticating user:', error);
+//       alert('An error occurred. Please try again later.');
+//     }
+//   };
+
+    const handleLogin = async () => {
     try {
-      if (signInEmail === 'admin' && signInPassword === '1') {
-        login();
+      const response = await fetch('http://localhost:5555/User/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          Email: signInEmail, 
+          Password: signInPassword 
+        }), 
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        login(data.token);
         setShowSuccessMessage(true);
       } else {
-        const response = await fetch('your-api-endpoint/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email: signInEmail, password: signInPassword }),
-        });
-
-        if (response.ok) {
-          login();
-          setShowSuccessMessage(true);
-        } else {
-          alert('Invalid credentials. Please try again.');
-        }
+        alert('Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Error authenticating user:', error);
       alert('An error occurred. Please try again later.');
     }
   };
+  
 
   const handleSignUp = async () => {
     try {
-      const response = await fetch('your-api-endpoint/signup', {
+      const response = await fetch('http://localhost:5555/User/signup', { // Update with your backend URL
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: signUpName, email: signUpEmail, password: signUpPassword }),
+        body: JSON.stringify({ Name: signUpName, Email: signUpEmail, Password: signUpPassword }), // Ensure keys match backend
       });
 
       if (response.ok) {
@@ -72,7 +94,8 @@ const LoginPage = () => {
         alert('Sign up failed. Please try again.');
       }
     } catch (error) {
-      console.error('Error signing up user:', error);
+    //   console.error('Error signing up user:', error);
+    console.log(error);
       alert('An error occurred. Please try again later.');
     }
   };

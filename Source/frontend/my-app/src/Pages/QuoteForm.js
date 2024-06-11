@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/QuoteForm.css';
+import axios from 'axios';
  
 const QuoteForm = ({ onClose }) => {
     const [formData, setFormData] = useState({
@@ -22,27 +23,31 @@ const QuoteForm = ({ onClose }) => {
  
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            // Submit your form data here, for example using Axios
-            // After successful submission, set submitted to true
-            setSubmitted(true);
-            // Reset form fields
-            setFormData({
-                name: '',
-                email: '',
-                phone: '',
-                service: '',
-                budget: '',
-                description: ''
-            });
-            // Close modal after 1 second
-            setTimeout(() => {
-                setSubmitted(false);
-                onClose();
-            }, 1000);
-        } catch (error) {
-            console.error('There was an error submitting the form:', error);
-        }
+		try {
+			const response = await axios.post(
+				"http://localhost:5555/quote/createquote",
+				formData,
+				{
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+					},
+					transformRequest: [
+						(data) => {
+							const formParams = new URLSearchParams();
+							for (const [key, value] of Object.entries(data)) {
+								formParams.append(key, value);
+							}
+							return formParams.toString();
+						},
+					],
+				}
+			);
+			console.log("Form submitted successfully:", response.data);
+			// Optionally, you can reset the form or show a success message
+		} catch (error) {
+			console.error("There was an error submitting the form:", error);
+			// Optionally, you can show an error message to the user
+		}
     };
  
     const handleClose = () => {

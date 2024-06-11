@@ -36,8 +36,9 @@ const quoteSchema = new mongoose.Schema({
     },
 	description: {
 		type: String,
+        required:true,
 		trim: true,
 	},
 });
 
-export const Contact = mongoose.model("Contact", contactSchema);
+export const Quote = mongoose.model("Quote", quoteSchema);

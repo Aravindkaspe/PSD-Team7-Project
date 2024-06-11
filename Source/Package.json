@@ -3,20 +3,20 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-      "start": "concurrently \"npm run server\" \"npm run client\"",
-      "server": "cd backend && npm start",
-      "client": "cd frontend/my-app && npm start"
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "cd backend && npm start",
+        "client": "cd frontend/my-app && npm start"
     },
     "devDependencies": {
-      "concurrently": "^6.2.0"
+        "concurrently": "^6.2.0"
     },
-
     "jest": {
         "transform": {
             "^.+\\.jsx?$": "babel-jest"
         }
+    },
+    "dependencies": {
+        "@testing-library/jest-dom": "^6.4.5",
+        "@testing-library/react": "^16.0.0"
     }
-    
-  }
-  
-  
+}

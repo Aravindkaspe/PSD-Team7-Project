@@ -5,17 +5,7 @@ import { default as jwt } from "jsonwebtoken";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	Firstname: {
-		type: String,
-		required: true,
-		trim: true,
-		validate(value) {
-			if (!validator.isAlpha(value)) {
-				throw new Error("Fullname should contain only alphabets!");
-			}
-		},
-	},
-	Lastname: {
+	Name: {
 		type: String,
 		required: true,
 		trim: true,

@@ -1,6 +1,6 @@
 import express from "express";
 import { Contact } from "../models/Contact.js";
-import { sendEmail } from "../emailService.js";
+// import { sendEmail } from "../emailService.js";
 
 const contactRouter = express.Router();
 
@@ -26,7 +26,7 @@ contactRouter.post("/createcontact", async (req, res) => {
         // Send an automated email
         const subject = "Thank you for contacting us!";
         const text = `Hello ${newContact.name},\n\nThank you for reaching out to us. We have received your query and will get back to you within 48 hours.\n\nBest regards,\nYour Company Name`;
-        sendEmail(newContact.email, subject, text);
+        // sendEmail(newContact.email, subject, text);
 
         return res.status(201).send(createdContact);
     } catch (error) {

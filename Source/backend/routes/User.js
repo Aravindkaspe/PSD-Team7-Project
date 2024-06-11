@@ -52,8 +52,7 @@ userRouter.post("/login", async (req, res) => {
 userRouter.post("/signup", async (req, res) => {
 	try {
 		if (
-			!req.body.Firstname ||
-			!req.body.Lastname ||
+			!req.body.Name ||
 			!req.body.Email ||
 			!req.body.Password
 		) {
@@ -63,8 +62,7 @@ userRouter.post("/signup", async (req, res) => {
 		}
 
 		const newUser = {
-			Firstname: req.body.Firstname,
-			Lastname: req.body.Lastname,
+			Name: req.body.Name,
 			Email: req.body.Email,
 			Password: req.body.Password,
 		};
@@ -81,7 +79,7 @@ userRouter.post("/signup", async (req, res) => {
 
 userRouter.patch("/update", async (req, res) => {
 	const updates = Object.keys(req.body);
-	const allowedUpdates = ["Firstname", "Lastname", "Email", "Password"];
+	const allowedUpdates = ["Name", "Email", "Password"];
 	const isValidOperation = updates.every((update) =>
 		allowedUpdates.includes(update)
 	);
