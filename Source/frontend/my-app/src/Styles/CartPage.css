@@ -1,0 +1,29 @@
+.cart-page {
+    padding: 20px;
+  }
+  
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-item input {
+    width: 50px;
+  }
+  
+  .cart-item button {
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
