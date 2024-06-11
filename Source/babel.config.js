@@ -1,5 +1,4 @@
 module.exports = {
-<<<<<<< HEAD
   presets: [
     '@babel/preset-env',
     '@babel/preset-react',
@@ -7,10 +6,4 @@ module.exports = {
   plugins: [
     '@babel/plugin-syntax-jsx',
   ],
-=======
-    presets: [
-        '@babel/preset-env',
-        '@babel/preset-react'
-    ],
->>>>>>> frontend-react2
 };

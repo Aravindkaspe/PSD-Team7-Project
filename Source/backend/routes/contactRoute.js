@@ -2,9 +2,9 @@ import express from 'express';
 import { sendContactEmail, sendAlertEmailToProductUsers } from '../emailService.js';
 import Contact from '../models/Contact.js';
 
-const router = express.Router();
+const contactRouter = express.Router();
 
-router.post('/createcontact', async (req, res) => {
+contactRouter.post('/createcontact', async (req, res) => {
   const contactDetails = req.body;
 
   try {

@@ -9,5 +9,5 @@ const contactSchema = new Schema({
   description: { type: String, required: true }
 });
 
-const Contact = mongoose.model('Contact', contactSchema);
-export default Contact;
+const ContactDetails = mongoose.model('Contact', contactSchema);
+export default ContactDetails;

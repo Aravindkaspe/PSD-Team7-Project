@@ -5,6 +5,7 @@ import contactRouter from './routes/contactRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import quoteRouter from './routes/quoteRoute.js';
 import cors from 'cors';
+import userRouter from './routes/User.js';
 
 const app = express();
 

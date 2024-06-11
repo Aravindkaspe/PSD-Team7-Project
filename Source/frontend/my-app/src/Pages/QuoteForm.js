@@ -6,12 +6,11 @@ const QuoteForm = ({ onClose }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        phone: '',
+        phoneNumber: '',
         service: '',
         budget: '',
         description: ''
     });
-    const [submitted, setSubmitted] = useState(false);
  
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,12 +42,18 @@ const QuoteForm = ({ onClose }) => {
 				}
 			);
 			console.log("Form submitted successfully:", response.data);
+      setSubmitted(true); 
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
 			// Optionally, you can reset the form or show a success message
 		} catch (error) {
 			console.error("There was an error submitting the form:", error);
 			// Optionally, you can show an error message to the user
 		}
     };
+
+    const [submitted, setSubmitted] = useState(false);
  
     const handleClose = () => {
         // Close modal
@@ -79,7 +84,7 @@ const QuoteForm = ({ onClose }) => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                                <input type="tel" id="phone" name="phoneNumber" value={formData.phone} onChange={handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="service">Service</label>

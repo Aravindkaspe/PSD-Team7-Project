@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import Contact from './models/Contact.js';
+import contactDetails from './models/Contact.js';
 import ProductUser from './models/ProductUser.js';
 import Quote from './models/Quote.js';
 
