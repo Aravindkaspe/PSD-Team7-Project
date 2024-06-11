@@ -1,28 +1,28 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ContactPage from './Pages/ContactPage';
-import Home from './Pages/Home';
-import ShopPage from './Pages/ShopPage';
-import ThreeDPrintingPage from './Pages/3DPrintingPage';
-import MaterialsPage from './Pages/MaterialsPage';
-
+import { CartProvider } from './Context/CartContext';
+import Header from './Components/Header';
+import ProductList from './Components/ProductList';
+import CartPage from './Components/CartPage';
+import Checkout from './Components/Checkout';
+import products from './Data/products';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/booking" element={<div>Booking Page</div>} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/3d-printing" element={<ThreeDPrintingPage />} />
-        <Route path="/materialsPage" element={<MaterialsPage />} />
-        
-     
-      </Routes>
-    </Router>
+    <CartProvider>
+      <Router>
+        <div className="container">
+          <Header />
+          <Routes>
+            <Route path="/" element={<ProductList products={products} />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </div>
+      </Router>
+    </CartProvider>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,24 @@
+.checkout {
+    padding: 20px;
+  }
+  
+  .checkout form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .checkout label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkout button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
