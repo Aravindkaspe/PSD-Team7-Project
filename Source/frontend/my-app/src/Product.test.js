@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ProductList from './ProductList';
 
-// Sample products for testing
 const products = [
   { id: 1, name: 'Smartphone', category: 'Electronics' },
   { id: 2, name: 'Laptop', category: 'Electronics' },
