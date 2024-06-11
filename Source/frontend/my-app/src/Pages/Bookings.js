@@ -9,16 +9,30 @@ import ContactFormModal from '../Components/ContactFormModal';
 import plant from "../Images/plant.jpeg";
 import custom from "../Images/custom.jpeg";
 import bulk from "../Images/bulk.jpeg";
+import QuoteForm from './QuoteForm';
+
 
 const Bookings = () => { 
-  const [modalOpen, setModalOpen] = useState(false);
 
+  const [modalOpen, setModalOpen] = useState(false);
+ 
     const openModal = (e) => {
         e.preventDefault();
         setModalOpen(true);
     };
-
+ 
     const closeModal = () => setModalOpen(false);
+  
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+ 
+    const openQuoteModal = () => {
+        setQuoteModalOpen(true);
+    };
+ 
+    const closeQuoteModal = () => {
+        setQuoteModalOpen(false);
+    };
+
   return (
     <div>
     <div>
@@ -94,17 +108,17 @@ const Bookings = () => {
             <h1><strong>Step 4: Collection or Delivery</strong><br /></h1>
             <p>Upon completion of your 3D print, we’ll contact you to arrange for either pickup from our Hyderabad location or delivery to your address.</p>
         
-        <div className="quote-button-container">
-          <button className="quote-button">Ask a Quote</button>
-        </div>
-                <ContactFormModal isOpen={modalOpen} onClose={closeModal} />
+            <div className="quote-button-container">
+            <button className="quote-button" onClick={openQuoteModal}>Ask for Quote</button>
+            </div>
+            {quoteModalOpen && <QuoteForm onClose={closeQuoteModal} />}
       </section>
       
       <section className="questions">
                     <h1>Got Questions? We're Here to Help!</h1>
                     <button className="contact-button" onClick={openModal}>Contact Us</button>
                 </section>
-                <ContactFormModal isOpen={modalOpen} onClose={closeModal} /> 
+                <ContactFormModal isOpen={modalOpen} onClose={closeModal} />
             <footer>
                 <p>&copy; The 3D Craft House. All rights reserved.</p>
             </footer>

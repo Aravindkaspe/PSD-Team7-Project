@@ -1,53 +1,70 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import axios from 'axios';
-import ContactForm from './ContactForm';
+import QuoteForm from './Pages/QuoteForm';
 
-// Mock axios
-jest.mock('axios');
+describe('QuoteForm Component', () => {
+  const mockOnClose = jest.fn();
 
-describe('ContactForm', () => {
-    it('should submit form data on click of Send button', async () => {
-        // Arrange
-        render(<ContactForm />);
+  beforeEach(() => {
+    render(<QuoteForm onClose={mockOnClose} />);
+  });
 
-        // Fill in the form fields
-        fireEvent.change(screen.getByPlaceholderText('John Smith'), {
-            target: { value: 'John Smith' }
-        });
-        fireEvent.change(screen.getByPlaceholderText('name@domain.com'), {
-            target: { value: 'john.smith@example.com' }
-        });
-        fireEvent.change(screen.getByPlaceholderText('country code + number'), {
-            target: { value: '1234567890' }
-        });
-        fireEvent.change(screen.getByPlaceholderText('Tell us about your Query'), {
-            target: { value: 'This is a test query.' }
-        });
+  test('renders QuoteForm component', () => {
+    expect(screen.getByText('Quote')).toBeInTheDocument();
+    expect(screen.getByText('Please allow up to 48 hours for a response.')).toBeInTheDocument();
+  });
 
-        // Mock the post request response
-        axios.post.mockResolvedValueOnce({ data: { message: 'Success' } });
+  test('handles input changes', () => {
+    fireEvent.change(screen.getByLabelText('Name*'), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText('Email*'), { target: { value: 'john@example.com' } });
+    fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '1234567890' } });
+    fireEvent.change(screen.getByLabelText('Service'), { target: { value: '3D Printing' } });
+    fireEvent.change(screen.getByLabelText('Total Budget (INR)'), { target: { value: '5000' } });
+    fireEvent.change(screen.getByLabelText('Project Description'), { target: { value: 'Description of the project' } });
 
-        // Act
-        fireEvent.click(screen.getByText('Send'));
+    expect(screen.getByLabelText('Name*').value).toBe('John Doe');
+    expect(screen.getByLabelText('Email*').value).toBe('john@example.com');
+    expect(screen.getByLabelText('Phone Number').value).toBe('1234567890');
+    expect(screen.getByLabelText('Service').value).toBe('3D Printing');
+    expect(screen.getByLabelText('Total Budget (INR)').value).toBe('5000');
+    expect(screen.getByLabelText('Project Description').value).toBe('Description of the project');
+  });
 
-        // Assert
-        await screen.findByText('Form submitted successfully:', { exact: false });
-        expect(axios.post).toHaveBeenCalledWith(
-            'http://localhost:5555/contact/createcontact',
-            new URLSearchParams({
-                name: 'John Smith',
-                email: 'john.smith@example.com',
-                phoneNumber: '1234567890',
-                description: 'This is a test query.'
-            }).toString(),
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                transformRequest: expect.any(Array)
-            }
-        );
+  test('submits the form', async () => {
+    fireEvent.change(screen.getByLabelText('Name*'), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText('Email*'), { target: { value: 'john@example.com' } });
+    fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '1234567890' } });
+    fireEvent.change(screen.getByLabelText('Service'), { target: { value: '3D Printing' } });
+    fireEvent.change(screen.getByLabelText('Total Budget (INR)'), { target: { value: '5000' } });
+    fireEvent.change(screen.getByLabelText('Project Description'), { target: { value: 'Description of the project' } });
+
+    await act(async () => {
+      fireEvent.submit(screen.getByRole('button', { name: /send/i }));
     });
+
+    await waitFor(() => expect(screen.getByText('Thank You!')).toBeInTheDocument());
+    expect(screen.getByText('Your form has been submitted successfully.')).toBeInTheDocument();
+  });
+
+  test('shows Thank You message on submit', async () => {
+    fireEvent.change(screen.getByLabelText('Name*'), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText('Email*'), { target: { value: 'john@example.com' } });
+    fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '1234567890' } });
+    fireEvent.change(screen.getByLabelText('Service'), { target: { value: '3D Printing' } });
+    fireEvent.change(screen.getByLabelText('Total Budget (INR)'), { target: { value: '5000' } });
+    fireEvent.change(screen.getByLabelText('Project Description'), { target: { value: 'Description of the project' } });
+
+    await act(async () => {
+      fireEvent.submit(screen.getByRole('button', { name: /send/i }));
+    });
+
+    await waitFor(() => expect(screen.getByText('Thank You!')).toBeInTheDocument());
+    expect(screen.getByText('Your form has been submitted successfully.')).toBeInTheDocument();
+  });
+
+  test('closes the modal on close button click', () => {
+    fireEvent.click(screen.getByText('X'));
+    expect(mockOnClose).toHaveBeenCalled();
+  });
 });
