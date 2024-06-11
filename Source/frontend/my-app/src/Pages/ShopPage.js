@@ -1,22 +1,68 @@
 // ShopPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductCard from '../Components/ProductCard';
 import NavigationBar from '../Components/NavigationBar';
+import { fetchProducts } from '../Components/Api/productApi'; // Import the fetchProducts function
 import '../Styles/ShopPage.css';
 
 const ShopPage = () => {
-    // Dummy product data
-    const [products, setProducts] = useState([
-        { id: 1, name: 'Product 1', price: 10 },
-        { id: 2, name: 'Product 2', price: 20 },
-        { id: 3, name: 'Product 3', price: 30 },
-        { id: 4, name: 'Product 4', price: 40 }
-    ]);
+    // Static product data
+    const staticProducts = [
+        { id: 1, name: 'Mandala Planter White Pearl', price: 51, type: 'Planter', color: 'White', image: 'path/to/white-planter.jpg' },
+        { id: 2, name: 'Mandala Stool Brown Wood', price: 544, type: 'Furniture', color: 'Brown', image: 'path/to/brown-stool.jpg' },
+        { id: 3, name: 'Mandala Planters Clear', price: 51, type: 'Planter', color: 'Clear', image: 'path/to/clear-planter.jpg' },
+    ];
 
-    // Dummy cart data
+    const [products, setProducts] = useState(staticProducts);
+    const [filteredProducts, setFilteredProducts] = useState(staticProducts);
+    const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+    const [filterOptions, setFilterOptions] = useState({
+        furniture: false,
+        planters: false,
+        sortOrder: 'asc',
+    });
+
+    useEffect(() => {
+        const filterProducts = async () => {
+            let filtered = [...products];
+
+            if (filterOptions.furniture || filterOptions.planters) {
+                setIsLoadingProducts(true);
+
+                try {
+                    const fetchedProducts = await fetchProducts(filterOptions);
+                    filtered = fetchedProducts;
+                } catch (error) {
+                    console.error('Error fetching products:', error);
+                } finally {
+                    setIsLoadingProducts(false);
+                }
+            }
+
+            filtered.sort((a, b) => {
+                if (filterOptions.sortOrder === 'asc') {
+                    return a.price - b.price;
+                } else {
+                    return b.price - a.price;
+                }
+            });
+
+            setFilteredProducts(filtered);
+        };
+
+        filterProducts();
+    }, [filterOptions, products]);
+
+    const handleFilterChange = (e) => {
+        setFilterOptions({
+            ...filterOptions,
+            [e.target.name]: e.target.checked,
+        });
+    };
+
+    // Dummy cart data and addToCart function
     const [cart, setCart] = useState([]);
 
-    // Function to add a product to the cart
     const addToCart = (product) => {
         const existingProduct = cart.find(item => item.id === product.id);
         if (existingProduct) {
@@ -36,11 +82,52 @@ const ShopPage = () => {
         <div className="shop-page">
             <NavigationBar cartItemCount={cart.reduce((total, item) => total + item.quantity, 0)} />
             <div className="shop-content">
-                <div className="sidebar">Filters</div>
+                <div className="sidebar">
+                    <h3>Filters</h3>
+                    <div>
+                        <h4>Product type</h4>
+                        <div className="filter-option">
+                            <input
+                                type="checkbox"
+                                id="furniture"
+                                name="furniture"
+                                checked={filterOptions.furniture}
+                                onChange={handleFilterChange}
+                            />
+                            <label htmlFor="furniture">Furniture</label>
+                        </div>
+                        <div className="filter-option">
+                            <input
+                                type="checkbox"
+                                id="planters"
+                                name="planters"
+                                checked={filterOptions.planters}
+                                onChange={handleFilterChange}
+                            />
+                            <label htmlFor="planters">Planters</label>
+                        </div>
+                    </div>
+                </div>
                 <div className="product-list">
-                    {products.map(product => (
-                        <ProductCard key={product.id} product={product} addToCart={addToCart} />
-                    ))}
+                    <div className="product-list-header">
+                        <h2>Shop All</h2>
+                        <div>
+                            <span>Sort by:</span>
+                            <select name="sortOrder" value={filterOptions.sortOrder} onChange={handleFilterChange}>
+                                <option value="asc">Price (Low to High)</option>
+                                <option value="desc">Price (High to Low)</option>
+                            </select>
+                        </div>
+                    </div>
+                    {isLoadingProducts ? (
+                        <div>Loading products...</div>
+                    ) : (
+                        <div className="product-grid">
+                            {filteredProducts.map(product => (
+                                <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

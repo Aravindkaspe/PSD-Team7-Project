@@ -38,20 +38,22 @@ const ThreeDPrintingPage = () => {
 
                 <section className="content-section">
                     <h2>How Does 3D Printing Work?</h2>
-                    <p>Design: Everything starts with a digital design, created in a 3D modeling program or scanned with a 3D scanner.
-                        Preparation: The design is then processed by slicing software that divides it into thousands of thin layers and prepares it for printing.
-                        Printing: The printer builds the object layer by layer. The material—plastic, metal, or resin—is extruded through a heated nozzle, solidifying to form the final product.
-                        Post-processing: Some prints may require cleaning, sanding, or painting to achieve the desired finish.</p>
+                    <ul>
+                        <li><strong>Design: </strong>Everything starts with a digital design, created in a 3D modeling program or scanned with a 3D scanner.</li>
+                        <li><strong>Preparation: </strong>The design is then processed by slicing software that divides it into thousands of thin layers and prepares it for printing.</li>
+                        <li><strong>Printing: </strong>The printer builds the object layer by layer. The material—plastic, metal, or resin—is extruded through a heated nozzle, solidifying to form the final product.</li>
+                        <li><strong>Post-processing: </strong>Some prints may require cleaning, sanding, or painting to achieve the desired finish.</li>
+                    </ul>
                 </section>
 
                 <section className="content-section">
                     <h2>Benefits of 3D Printing</h2>
                     <ul>
-                        <li>Customization: Each item can be individually customized with minimal additional cost, perfect for personalized gifts or tailored components in various industries.</li>
-                        <li>Speed: From design to production, 3D printing streamlines the process, allowing for rapid prototyping and speedy adjustments that accelerate development cycles.</li>
-                        <li>Cost-Effective: By reducing material waste and the need for expensive molds or tools, 3D printing proves to be economical for small production runs and prototypes.</li>
-                        <li>Innovation: The ability to create complex, lightweight structures in one piece, without assembly, encourages innovation and design freedom across industries like aerospace, automotive, and healthcare.</li>
-                        <li>On-Demand Production: Manufacture products on demand, reducing inventory costs and storage space.</li>
+                        <li><strong>Customization: </strong>Each item can be individually customized with minimal additional cost, perfect for personalized gifts or tailored components in various industries.</li>
+                        <li><strong>Speed: </strong>From design to production, 3D printing streamlines the process, allowing for rapid prototyping and speedy adjustments that accelerate development cycles.</li>
+                        <li><strong>Cost-Effective: </strong>By reducing material waste and the need for expensive molds or tools, 3D printing proves to be economical for small production runs and prototypes.</li>
+                        <li><strong>Innovation: </strong>The ability to create complex, lightweight structures in one piece, without assembly, encourages innovation and design freedom across industries like aerospace, automotive, and healthcare.</li>
+                        <li><strong>On-Demand Production: </strong>Manufacture products on demand, reducing inventory costs and storage space.</li>
                     </ul>
                 </section>
 

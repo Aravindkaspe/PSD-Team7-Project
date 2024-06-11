@@ -106,7 +106,15 @@ nav ul li a:hover {
     font-size: 2em;
 }
 
-.content-section p, .content-section ul {
+.content-section p {
+    margin: 20px auto;
+    max-width: 1000px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.content-section ul {
     margin: 20px auto;
     max-width: 1000px;
     line-height: 1.6;

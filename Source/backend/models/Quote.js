@@ -1,17 +1,44 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import validator from "validator";
 
-const { Schema } = mongoose;
+const quoteSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	email: {
+		type: String,
+		required: true,
+		trim: true,
+		unique: true,
+		validate(value) {
+			if (!validator.isEmail(value)) {
+				throw new Error("Invalid Email");
+			}
+		},
+	},
+	phoneNumber: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+    service:{
+        type: String,
+        required: true,
+        trim: true,
+    },
+    budget:{
+        type: Number,
+        required: true,
+        trim: true,
 
-const quoteSchema = new Schema({
-  customerName: { type: String, required: true },
-  customerEmail: { type: String, required: true },
-  phone: { type: String, required: true },
-  service: { type: String, required: true },
-  totalBudget: { type: Number, required: true },
-  itemDescription: { type: String, required: true },
-  location: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+    },
+	description: {
+		type: String,
+        required:true,
+		trim: true,
+	},
 });
 
-const Quote = mongoose.model('Quote', quoteSchema);
-export default Quote;
+export const Quote = mongoose.model("Quote", quoteSchema);

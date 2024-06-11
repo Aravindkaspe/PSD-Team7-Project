@@ -1,81 +1,65 @@
+
 /* ShopPage.css */
-.shop-container {
+.shop-page {
     display: flex;
-    padding: 20px;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.filter-sidebar {
+.shop-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sidebar {
     width: 200px;
-    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.product-list {
+    flex-grow: 1;
     padding: 20px;
 }
 
-.products-container {
-    flex: 1;
+.product-list-header {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
 }
 
 .product-card {
-    width: calc(25% - 20px);
-    margin: 0 10px 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
 }
 
 .product-card img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    border-bottom: 1px solid #eee;
-}
-
-.product-details {
-    padding: 10px 20px;
-}
-
-.product-name {
-    font-size: 1.2em;
     margin-bottom: 10px;
 }
 
-.product-price {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #333;
+.product-card button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.filter-options {
-    margin-bottom: 20px;
-}
-
-.filter-option {
-    margin-bottom: 10px;
-}
-
-.filter-label {
-    font-weight: bold;
-}
-
-.price-slider {
-    margin-bottom: 20px;
-}
-
-.categories-list {
-    list-style: none;
-    padding: 0;
-}
-
-.categories-list li {
-    margin-bottom: 5px;
-}
-
-.categories-list label {
-    margin-left: 5px;
+.product-card:hover button {
+    opacity: 1;
 }
