@@ -14,16 +14,13 @@ describe('NavBar', () => {
                 <NavBar openModal={openModalMock} />
             </Router>
         );
-
-        // Check if the logo is rendered
+        
         const logoImg = screen.getByAltText('3D Craft House Logo');
         expect(logoImg).toBeInTheDocument();
         
-        // Check if the logo text is rendered
         const logoText = screen.getByText('The 3D Craft House');
         expect(logoText).toBeInTheDocument();
-        
-        // Check if navigation items are rendered
+    
         const contactUsLink = screen.getByText('Contact Us');
         const bookingLink = screen.getByText('Booking');
         const shopLink = screen.getByText('Shop');
