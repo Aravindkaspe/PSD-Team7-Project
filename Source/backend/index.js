@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { PORT, MongoURL } from './config.js';
 import contactRouter from './routes/contactRoute.js';
-import quoteRouter from './routes/quoteRoute.js';
+import quoteRouter from './routes/QuoteRoute.js';
 import userRouter from './routes/User.js';
 
 const app = express();
