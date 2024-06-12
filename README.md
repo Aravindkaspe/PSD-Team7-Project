@@ -40,3 +40,6 @@ To run the project locally, follow these steps:
 3. After that, go to the Frontend directory in the project and run: npm install. The Server will install necessary dependencies for frontend Server.
 4. Now, Start the application from Source directory by running the server: npm start.
 5. This will run your application on port 3000.
+
+## Run the testcases:
+1. To run test cases for email service run command: npm run test:unit

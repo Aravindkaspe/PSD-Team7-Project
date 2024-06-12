@@ -1,31 +1,26 @@
-import express from "express";
-import quote from "../models/Quote.js";
+import express from 'express';
+import Quote from '../models/Quote.js';
+import { sendQuoteConfirmationEmail, sendQuoteAlertEmail } from '../emailService.js';
 
-const quoteRouter = express.Router();
+const router = express.Router();
 
-quoteRouter.post("/createquote", async (req, res)=> {
-    try {
-        if (!req.body.name || !req.body.email || !req.body.phoneNumber || !req.body.service|| !req.body.budget) {
-            return res.status(400).send("Please provide required information!");
-        }
+router.post('/createquote', async (req, res) => {
+  try {
+    console.log('Received Quote Request Body:', req.body);
 
-        const newQuote = {
-            name: req.body.name,
-            email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
-            service: req.body.service,
-            budget: req.body.budget,
-            description: req.body.description,
-        };
+    const { name, email, phoneNumber, service, budget, description } = req.body;
 
-        const createdQuote = await quote.create(newQuote);
+    const newQuote = await Quote.create({ name, email, phoneNumber, service, budget, description });
+    console.log('New Quote Created:', newQuote);
 
-        return res.status(201).send(createdQuote);
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).send({ message: error.message });
-    }
-})
+    await sendQuoteConfirmationEmail({ customerName: name, customerEmail: email, service, budget, description });
+    await sendQuoteAlertEmail({ customerName: name, customerEmail: email, service, budget, description });
 
+    res.status(201).json({ message: 'Quote request submitted successfully' });
+  } catch (error) {
+    console.error('Error creating new quote:', error);
+    res.status(500).json({ error: 'Failed to submit quote request' });
+  }
+});
 
-export default quoteRouter;
+export default router;

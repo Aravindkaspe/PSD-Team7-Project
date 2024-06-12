@@ -2,15 +2,19 @@
     "name": "3D craft house",
     "version": "1.0.0",
     "private": true,
+    "main": "index.js",
+    "type": "module",
     "scripts": {
         "start": "concurrently \"npm run server\" \"npm run client\"",
         "server": "cd backend && npm start",
         "client": "cd frontend/my-app && npm start",
-        "test": "jest --config jest.config.js"
+        "test": "jest --config jest.config.mjs",
+        "test:unit": "jest __tests__ --config jest.config.mjs"
     },
     "devDependencies": {
         "@babel/core": "^7.24.7",
         "@babel/plugin-syntax-jsx": "^7.24.7",
+        "@babel/plugin-transform-modules-commonjs": "^7.24.7",
         "@babel/preset-env": "^7.24.7",
         "@babel/preset-react": "^7.24.7",
         "babel-jest": "^29.7.0",
