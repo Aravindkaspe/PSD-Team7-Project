@@ -1,8 +1,7 @@
-
 import mongoose from 'mongoose';
-import ProductUser from '../backend/models/ProductUser'; 
-import ContactDetails from '../backend/models/Contact'; 
-import quote from '../backend/models/Quote'; 
+import ProductUser from '../backend/models/ProductUser.js';
+import ContactDetails from '../backend/models/Contact.js';
+import Quote from '../backend/models/Quote.js';
 
 const mockContact = {
   email: 'contact@gmail.com',
@@ -37,7 +36,10 @@ jest.mock('../backend/models/Quote', () => ({
 describe('load email data from db', () => {
   beforeAll(async () => {
     const dbURI = 'mongodb+srv://cgundu1:8IoxAEGU0uT8row3@cluster0.hqtcl60.mongodb.net/projectDB';
-    await mongoose.connect(dbURI);
+    await mongoose.connect(dbURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   });
 
   afterAll(async () => {
@@ -50,7 +52,7 @@ describe('load email data from db', () => {
     expect(contact.email).toMatch(/.+@.+\..+/); 
   });
 
-  test('fetch productuser email address', async () => {
+  test('fetch product user email address', async () => {
     const productUser = await ProductUser.findOne(); 
     expect(productUser).toBeTruthy();
     expect(productUser.email).toMatch(/.+@.+\..+/); 
@@ -64,12 +66,12 @@ describe('load email data from db', () => {
   });
 
   test('fetch quote details', async () => {
-    const Quote = await quote.findOne(); 
-    expect(Quote).toBeTruthy();
-    expect(Quote.customerName).toBe('Jane Smith'); 
-    expect(Quote.service).toBe('Web Development'); 
-    expect(Quote.totalBudget).toBe(1500); 
-    expect(Quote.itemDescription).toBe('Website redesign'); 
-    expect(Quote.location).toBe('New York');
+    const quote = await Quote.findOne(); 
+    expect(quote).toBeTruthy();
+    expect(quote.customerName).toBe('Jane Smith'); 
+    expect(quote.service).toBe('Web Development'); 
+    expect(quote.totalBudget).toBe(1500); 
+    expect(quote.itemDescription).toBe('Website redesign'); 
+    expect(quote.location).toBe('New York');
   });
 });

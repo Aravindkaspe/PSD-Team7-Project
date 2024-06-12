@@ -1,10 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { PORT, MongoURL } from './config.js';
 import contactRouter from './routes/contactRoute.js';
-import orderRouter from './routes/orderRoute.js';
 import quoteRouter from './routes/quoteRoute.js';
-import cors from 'cors';
 import userRouter from './routes/User.js';
 
 const app = express();
@@ -38,7 +37,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect(MongoURL)
+  .connect(MongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {
