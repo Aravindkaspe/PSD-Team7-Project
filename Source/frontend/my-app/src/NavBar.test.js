@@ -14,7 +14,7 @@ describe('NavBar', () => {
                 <NavBar openModal={openModalMock} />
             </Router>
         );
-        
+
         const logoImg = screen.getByAltText('3D Craft House Logo');
         expect(logoImg).toBeInTheDocument();
         
