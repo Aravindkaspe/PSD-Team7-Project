@@ -1,32 +1,54 @@
-# Couldn't automatically generate a config from your source code.
-# This is a generic template to serve as a base for your custom config
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
+
+executors:
+  docker-executor:
+    docker:
+      - image: circleci/node:14.18.0
+    working_directory: ~/repo
+
 jobs:
-  build_and_push:
-  docker:
-    - image: cimg/python:3.8
-  steps:
-    - checkout
-    - setup_remote_docker:
-        version: 19.03.13
-    - run:
-        name: Build Docker Image
-        command: |
-          docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .
-    - run:
-        name: Authenticate with Docker Hub
-        command: |
-          echo "$DOCKERHUB_PASS" | docker login --username$DOCKERHUB_USERNAME --password-stdin
-    - run:
-        name: Push Docker Image to Docker Hub
-        command: |
-          docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}
+  test:
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: Install Dependencies
+          command: |
+            npm install
+            cd Source/frontend/my-app
+            npm install
+      - run:
+          name: Run Tests
+          command: npm test
+
+  build-and-push-docker-image:
+    docker:
+      - image: circleci/node:14.18.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .
+      - run:
+          name: Authenticate with Docker Hub
+          command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      - run:
+          name: Push Docker Image to Docker Hub
+          command: docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}
+
 workflows:
   version: 2
-  build_and_deploy:
+  test-and-deploy:
     jobs:
-      - build_and_push:
-        filters:
-          branches:
-            only: main
+      - test
+      - build-and-push-docker-image:
+          requires:
+            - test
