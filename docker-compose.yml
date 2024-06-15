@@ -1,26 +1,28 @@
-version: '3.8'
+version: "3.8"
 
 services:
   backend:
     build:
-      context: ./Source/backend
+      context: .
       dockerfile: Dockerfile.backend
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./Source/backend:/app
     ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: production
+      - "5555:5555"
+    networks:
+      - app-network
 
   frontend:
     build:
-      context: ./Source/frontend/my-app
+      context: .
       dockerfile: Dockerfile.frontend
     volumes:
-      - ./frontend/my-app:/app
-      - /app/node_modules
+      - ./Source/frontend/my-app:/app
     ports:
-      - "5555:5555"
-    environment:
-      NODE_ENV: production
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

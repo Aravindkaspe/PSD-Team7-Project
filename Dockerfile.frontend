@@ -1,0 +1,26 @@
+# Use the official Node.js image
+FROM node:16
+
+# Create and change to the app directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY Source/frontend/my-app/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY Source/frontend/my-app .
+
+# Build the app
+RUN npm run build
+
+# Install serve to serve the built app
+RUN npm install -g serve
+
+# Expose port 3000
+EXPOSE 3000
+
+# Start the application
+CMD ["serve", "-s", "build"]
