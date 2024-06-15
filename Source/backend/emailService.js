@@ -76,7 +76,7 @@ export const sendQuoteConfirmationEmail = (quoteDetails) => {
 Thank you for requesting a quote! Here are the details:
 
 Service: ${quoteDetails.service}
-Total Budget: $${quoteDetails.budget}
+Total Budget: INR${quoteDetails.budget}
 Item Description: ${quoteDetails.description}
 
 Best regards,
@@ -101,7 +101,7 @@ A new quote has been submitted. Here are the details:
 
 Customer Name: ${quoteDetails.customerName}
 Service: ${quoteDetails.service}
-Total Budget: $${quoteDetails.budget}
+Total Budget: INR${quoteDetails.budget}
 Item Description: ${quoteDetails.description}
 
 Best regards,
