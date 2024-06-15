@@ -15,7 +15,7 @@ const Detail = () => {
   const data = {
     id: id,
     title: "Sample Product",
-    price: 49.99,
+    price: 51.00,
     category: "sample-category",
     description: "This is a sample product description.",
     image: "https://via.placeholder.com/150",
@@ -72,7 +72,7 @@ const Detail = () => {
             </div>
             <div className={styles.price}>
               <p>
-                {data.price.toFixed(2)} <small>TRY</small>
+                {data.price.toFixed(2)} <small>INR</small>
               </p>
             </div>
             <div className={styles.addToBasketAndQuantity}>

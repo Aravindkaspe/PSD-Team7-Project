@@ -4,8 +4,7 @@ import GetIcon from "../Components/GetIcon";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <p>
-      </p>
+      <p>&copy; The 3D Craft House. All rights reserved.</p>
     </footer>
   );
 };

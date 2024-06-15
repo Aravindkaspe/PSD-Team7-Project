@@ -37,11 +37,11 @@ const App = () => {
       <Router>
         <BasketContextProvider>
           <div className={clsx(device.type === "mobile" && styles.paddingForMobile, styles.container)}>
-            <Header />
+            {/* <Header /> */}
             <main className={styles.main}>
               <AppRoutes />
             </main>
-            <Footer />
+            {/* <Footer /> */}
           </div>
           <BasketSidebar />
           {device.type === "mobile" && <MobileBottomNav />}

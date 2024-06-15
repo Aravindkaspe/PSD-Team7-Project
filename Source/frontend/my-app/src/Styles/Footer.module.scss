@@ -2,17 +2,18 @@
 
 .footer {
   padding: 0 1rem;
-  background-color: $silver;
+  padding-block: 1%;
+  padding-top: auto;
+  background-color: $white;
   height: 50px;
   display: flex;
   align-items: center;
+  width: 100%;
+  text-align: center;
 
   p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    gap: 10px;
+    color: black;
     text-transform: uppercase;
+    margin: 0%;
   }
 }

@@ -1,7 +1,8 @@
 import styles from "../Styles/ShopPage.module.scss";
 import Card from "../Components/Card";
 import Title from "../Components/Title";
-import bus from "../Images/3d brick.jpg"
+import bus from "../Images/3d brick.jpg";
+import Header from "../Components/Header";
 
 const ShopPage = () => {
     const shopdata = [
@@ -11,6 +12,8 @@ const ShopPage = () => {
       ];
     
       return (
+        <div className={styles.shopContainer}>
+            <div className= {styles.header}><Header/></div>
         <section className={styles.home}>
           <div className={styles.container}>
             <div className={styles.row}>
@@ -23,6 +26,10 @@ const ShopPage = () => {
             </div>
           </div>
         </section>
+        <footer>
+                <p>&copy; The 3D Craft House. All rights reserved.</p>
+            </footer>
+        </div>
       );
     };
 
