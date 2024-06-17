@@ -16,8 +16,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            npm install
-            cd Source/frontend/my-app
+            cd Source
             npm install
       - run:
           name: Run Tests
