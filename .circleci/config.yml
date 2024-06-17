@@ -15,14 +15,12 @@ jobs:
           version: 20.10.7
       - run:
           name: Install Dependencies
-          command: |
-            cd Source
-            npm install
+          command: npm install
+          working_directory: Source/frontend/my-app
       - run:
           name: Run Tests
-          command: |
-            cd Source
-            npm test
+          command: npm test
+          working_directory: Source/frontend/my-app
   build-and-push-docker-image:
     docker:
       - image: circleci/node:14.18.0
