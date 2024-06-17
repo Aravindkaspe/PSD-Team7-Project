@@ -16,8 +16,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            npm install
-            cd Source/frontend/my-app
+            cd Source
             npm install
       - run:
           name: Run Tests
@@ -36,7 +35,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .
+            docker-compose build .
       - run:
           name: Authenticate with Docker Hub
           command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
