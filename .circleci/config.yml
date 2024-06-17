@@ -14,13 +14,22 @@ jobs:
       - setup_remote_docker:
           version: 20.10.7
       - run:
-          name: Install Dependencies
+          name: Install Frontend Dependencies
           command: npm install
           working_directory: Source/frontend/my-app
       - run:
-          name: Run Tests
+          name: Run Frontend Test cases
           command: npm test
           working_directory: Source/frontend/my-app
+      - run:
+          name: Install Backend Dependencies
+          command: npm install
+          working_directory: Source/backend
+      - run:
+          name: Run Backend Test cases
+          command: npm test
+          working_directory: Source/backend
+    
   build-and-push-docker-image:
     docker:
       - image: circleci/node:14.18.0
