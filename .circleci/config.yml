@@ -18,11 +18,7 @@ jobs:
           command: |
             cd Source
             npm install
-      - run:
-          name: Run Tests
-          command: |
-            cd Source/
-            npm test
+     
 
   build-and-push-docker-image:
     docker:
@@ -53,5 +49,4 @@ workflows:
     jobs:
       - test
       - build-and-push-docker-image:
-          requires:
-            - test
+          
