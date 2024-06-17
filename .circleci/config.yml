@@ -23,8 +23,6 @@ jobs:
           command: |
             cd Source
             npm test
-     
-
   build-and-push-docker-image:
     docker:
       - image: circleci/node:14.18.0
@@ -43,7 +41,7 @@ jobs:
           command: docker tag project_frontend $DOCKERHUB_USERNAME/project_frontend:v1
       - run:
           name: Tag Backend Docker Image
-          command: docker tag  project_backend $DOCKERHUB_USERNAME/project_backend:v1
+          command: docker tag project_backend $DOCKERHUB_USERNAME/project_backend:v1
       - run:
           name: Authenticate with Docker Hub
           command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
@@ -51,7 +49,7 @@ jobs:
           name: Push Docker Image to Docker Hub
           command: docker push $DOCKERHUB_USERNAME/project_frontend:v1
       - run:
-          name: Push 
+          name: Push Backend Docker Image to Docker Hub
           command: docker push $DOCKERHUB_USERNAME/project_backend:v1
 
 workflows:
@@ -60,5 +58,5 @@ workflows:
     jobs:
       - test
       - build-and-push-docker-image:
-        requires:
-          - test
+          requires:
+            - test
