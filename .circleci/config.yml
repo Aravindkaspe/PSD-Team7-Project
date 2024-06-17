@@ -35,10 +35,10 @@ jobs:
           command: docker-compose build
       - run:
           name: Tag Frontend Docker Image
-          command: docker tag project_frontend $DOCKERHUB_USERNAME/ project_frontend:v1
+          command: docker tag project_frontend $DOCKERHUB_USERNAME/project_frontend:v1
       - run:
           name: Tag Backend Docker Image
-          command: docker tag  project_backend $DOCKERHUB_USERNAME/ project_backend:v1
+          command: docker tag  project_backend $DOCKERHUB_USERNAME/project_backend:v1
       - run:
           name: Authenticate with Docker Hub
           command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
