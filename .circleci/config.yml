@@ -21,7 +21,9 @@ jobs:
             npm install
       - run:
           name: Run Tests
-          command: npm test
+          command: |
+            cd Source/
+            npm test
 
   build-and-push-docker-image:
     docker:
