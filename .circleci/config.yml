@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-executor:
     docker:
-      - image: circleci/node:14.18.0
+      - image: circleci/node:16
     working_directory: ~/repo
 
 jobs:
@@ -21,9 +21,8 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            cd Source/
+            cd Source
             npm test
-
   build-and-push-docker-image:
     docker:
       - image: circleci/node:14.18.0
@@ -36,14 +35,22 @@ jobs:
           command: npm install
       - run:
           name: Build Docker Image
-          command: |
-            docker-compose build .
+          command: docker-compose build
+      - run:
+          name: Tag Frontend Docker Image
+          command: docker tag project_frontend $DOCKERHUB_USERNAME/project_frontend:v1
+      - run:
+          name: Tag Backend Docker Image
+          command: docker tag project_backend $DOCKERHUB_USERNAME/project_backend:v1
       - run:
           name: Authenticate with Docker Hub
           command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
       - run:
           name: Push Docker Image to Docker Hub
-          command: docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}
+          command: docker push $DOCKERHUB_USERNAME/project_frontend:v1
+      - run:
+          name: Push Backend Docker Image to Docker Hub
+          command: docker push $DOCKERHUB_USERNAME/project_backend:v1
 
 workflows:
   version: 2
