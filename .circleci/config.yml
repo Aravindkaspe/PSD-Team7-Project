@@ -58,8 +58,6 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
+    - build-and-push-docker-image
+      requires:
       - test
-      - build-and-push-docker-image:
-        requires:
-          - test
-          
