@@ -60,5 +60,5 @@ workflows:
     jobs:
       - build-and-push-docker-image:
         requires:
-          - test
+        - test
           
