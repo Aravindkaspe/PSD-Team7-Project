@@ -19,7 +19,7 @@ jobs:
           working_directory: Source/frontend/my-app
       - run:
           name: Run Frontend Test cases
-          command: npm test
+          command: npx react-scripts test --watchAll=false
           working_directory: Source/frontend/my-app
       - run:
           name: Install Backend Dependencies
