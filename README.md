@@ -42,4 +42,13 @@ To run the project locally, follow these steps:
 5. This will run your application on port 3000.
 
 ## Run the testcases:
-1. To run test cases for email service run command: npm run test:unit
+1. To run test cases for email service run command "npm run test:unit" in Source/backend directory.
+2. To run test cases for frontend services run command "npm test" in Source/frontend/my-app directory. 
+
+## Alternate way to run the application using docker
+
+1. Install docker desktop from the below URL https://www.docker.com/products/docker-desktop/
+2. Clone the project to your local using the command: git clone https://github.com/Aravindkaspe/PSD-Team7-Project.git 
+3. Start the docker desktop and then navigate to your project directory where docker-compose.yml is located
+4. Run "docker-compose build" command. This will create docker image to your local.
+5. Run "docker-compose up" command. This will run the application on port 3000.

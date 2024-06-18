@@ -24,11 +24,11 @@ jobs:
       - run:
           name: Install Backend Dependencies
           command: npm install
-          working_directory: Source/backend
+          working_directory: Source
       - run:
           name: Run Backend Test cases
           command: npm test
-          working_directory: Source/backend
+          working_directory: Source
     
   build-and-push-docker-image:
     docker:
