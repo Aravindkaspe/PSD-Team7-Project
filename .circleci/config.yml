@@ -18,8 +18,12 @@ jobs:
           command: npm install
           working_directory: Source/frontend/my-app
       - run:
-          name: Run Frontend Test cases
-          command: npm test a
+          name: Run Frontend Login Test cases
+          command: npm test Login.test.js
+          working_directory: Source/frontend/my-app
+      - run:
+          name: Run Frontend NavBar Test cases
+          command: npm test NavBar.test.js
           working_directory: Source/frontend/my-app
       - run:
           name: Install Backend Dependencies
