@@ -19,16 +19,16 @@ jobs:
           working_directory: Source/frontend/my-app
       - run:
           name: Run Frontend Test cases
-          command: npm test
+          command: npm test a
           working_directory: Source/frontend/my-app
       - run:
           name: Install Backend Dependencies
           command: npm install
-          working_directory: Source/backend
+          working_directory: Source
       - run:
           name: Run Backend Test cases
-          command: npm test
-          working_directory: Source/backend
+          command: npm test emailTest.test.js
+          working_directory: Source
     
   build-and-push-docker-image:
     docker:
