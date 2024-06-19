@@ -52,3 +52,5 @@ To run the project locally, follow these steps:
 3. Start the docker desktop and then navigate to your project directory where docker-compose.yml is located
 4. Run "docker-compose build" command. This will create docker image to your local.
 5. Run "docker-compose up" command. This will run the application on port 3000.
+6. Instead, you can pull the image for frontend as "docker pull aravindkaspe/project_frontend:v1"
+7. Also, for backend as "docker pull aravindkaspe/project_backend:v1"
